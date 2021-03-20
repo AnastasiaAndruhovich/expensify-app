@@ -12,6 +12,8 @@ import './playground/promises'
 import AppRouter from './routers/AppRouter'
 import configureStore from './store/configureStore'
 
+import {startSetExpenses} from "./actions/expenses"
+
 const store = configureStore()
 
 const jsx = (
@@ -19,5 +21,11 @@ const jsx = (
         <AppRouter/>
     </Provider>
 )
-ReactDOM.render(jsx, document.getElementById('app'))
+
+ReactDOM.render(<p>Loading...</p>, document.getElementById('app'))
+
+store.dispatch(startSetExpenses()).then(() => {
+    ReactDOM.render(jsx, document.getElementById('app'))
+})
+
 
